@@ -9,21 +9,29 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.view.backgroundColor = UIColor.gray
+        self.navigationItem.title = "Profile"
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override  func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let  button = UIButton(type: .system)
+        button.isUserInteractionEnabled = true
+        button.frame = CGRect(origin: CGPoint(x: 30,y: 100), size: CGSize(width: 150, height: 30))
+        button.setTitle("Show feed", for: .normal)
+        button.backgroundColor = .systemGreen
+        view.addSubview(button)
+        button.addTarget(self, action: #selector(showDetails), for: .touchUpInside)
     }
-    */
-
+    
+    @objc func showDetails() {
+        let feedViewController = FeedViewController()
+        //present(feedViewController, animated: true)
+        navigationController?.pushViewController(feedViewController, animated: true)
+    }
 }
+
