@@ -9,11 +9,16 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    var profileHeaderView: ProfileHeaderView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.gray
+        self.view.backgroundColor = UIColor.lightGray
         self.navigationItem.title = "Profile"
+        
+        super.viewDidLoad()
+        profileHeaderView = ProfileHeaderView()
+        view.addSubview(profileHeaderView)
     }
     
     override  func viewDidLayoutSubviews() {
@@ -26,6 +31,8 @@ class ProfileViewController: UIViewController {
         button.backgroundColor = .systemGreen
         view.addSubview(button)
         button.addTarget(self, action: #selector(showDetails), for: .touchUpInside)
+        
+        profileHeaderView.frame = view.frame
     }
     
     @objc func showDetails() {
@@ -33,5 +40,17 @@ class ProfileViewController: UIViewController {
         //present(feedViewController, animated: true)
         navigationController?.pushViewController(feedViewController, animated: true)
     }
+    
+    func setupUI(){
+            view.addSubview(profileHeaderView)
+            
+            NSLayoutConstraint.activate([
+                profileHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+                profileHeaderView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+                profileHeaderView.leftAnchor.constraint(equalTo: view.leftAnchor),
+                profileHeaderView.rightAnchor.constraint(equalTo: view.rightAnchor)
+            ])
+            
+        }
 }
 

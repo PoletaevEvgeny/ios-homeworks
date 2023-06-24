@@ -18,6 +18,7 @@
 		FD79C1A22A426B900039E1FD /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD79C1A12A426B900039E1FD /* InfoViewController.swift */; };
 		FD79C1A42A426BB30039E1FD /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD79C1A32A426BB30039E1FD /* UIAlertController.swift */; };
 		FD79C1A82A426CAA0039E1FD /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD79C1A72A426CAA0039E1FD /* Post.swift */; };
+		FDD755202A448A8900E0F7B0 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7551F2A448A8900E0F7B0 /* ProfileHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		FD79C1A12A426B900039E1FD /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		FD79C1A32A426BB30039E1FD /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		FD79C1A72A426CAA0039E1FD /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		FDD7551F2A448A8900E0F7B0 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,9 +68,9 @@
 		FD79C1862A4262690039E1FD /* Navigator_2.0 */ = {
 			isa = PBXGroup;
 			children = (
+				FDD7551E2A44886A00E0F7B0 /* Profile */,
 				FD79C1872A4262690039E1FD /* AppDelegate.swift */,
 				FD79C1892A4262690039E1FD /* SceneDelegate.swift */,
-				FD79C19B2A4268BF0039E1FD /* ProfileViewController.swift */,
 				FD79C19D2A4268D50039E1FD /* FeedViewController.swift */,
 				FD79C19F2A426AC50039E1FD /* PostViewController.swift */,
 				FD79C1A12A426B900039E1FD /* InfoViewController.swift */,
@@ -80,6 +82,15 @@
 				FD79C1952A42626B0039E1FD /* Info.plist */,
 			);
 			path = Navigator_2.0;
+			sourceTree = "<group>";
+		};
+		FDD7551E2A44886A00E0F7B0 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				FDD7551F2A448A8900E0F7B0 /* ProfileHeaderView.swift */,
+				FD79C19B2A4268BF0039E1FD /* ProfileViewController.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,6 +170,7 @@
 				FD79C1A42A426BB30039E1FD /* UIAlertController.swift in Sources */,
 				FD79C19E2A4268D50039E1FD /* FeedViewController.swift in Sources */,
 				FD79C1A82A426CAA0039E1FD /* Post.swift in Sources */,
+				FDD755202A448A8900E0F7B0 /* ProfileHeaderView.swift in Sources */,
 				FD79C19C2A4268BF0039E1FD /* ProfileViewController.swift in Sources */,
 				FD79C18A2A4262690039E1FD /* SceneDelegate.swift in Sources */,
 			);
