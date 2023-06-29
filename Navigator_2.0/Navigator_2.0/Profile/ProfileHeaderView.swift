@@ -10,7 +10,7 @@ import UIKit
 class ProfileHeaderView: UIView {
 
     
-       private let avatarImageView: UIImageView = {
+       private let imageView: UIImageView = {
            let view = UIImageView()
            let profilePhoto = UIImage(named: "cat")
            view.image = profilePhoto
@@ -23,7 +23,7 @@ class ProfileHeaderView: UIView {
            return view
        }()
        
-       private let fullNameLabel: UILabel = {
+       private let userName: UILabel = {
            let view = UILabel()
            view.text = "Nice Cat"
            view.textColor = .black
@@ -32,7 +32,7 @@ class ProfileHeaderView: UIView {
            return view
        }()
        
-       private let statusLabel: UILabel = {
+       private let userStatus: UILabel = {
            let view = UILabel()
            view.text = "I'm really a cute kitty?"
            view.numberOfLines = 0
@@ -43,7 +43,7 @@ class ProfileHeaderView: UIView {
            return view
        }()
        
-       private let setStatusButton: UIButton = {
+       private let statusButton: UIButton = {
            let view = UIButton()
            view.backgroundColor = .systemBlue
            view.setTitle("Show status", for: .normal)
@@ -68,35 +68,35 @@ class ProfileHeaderView: UIView {
        }
        
        func setupUI() {
-           self.addSubview(avatarImageView)
-           self.addSubview(fullNameLabel)
-           self.addSubview(setStatusButton)
-           self.addSubview(statusLabel)
+           self.addSubview(imageView)
+           self.addSubview(userName)
+           self.addSubview(statusButton)
+           self.addSubview(userStatus)
            
            NSLayoutConstraint.activate([
-            avatarImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            avatarImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
-            avatarImageView.heightAnchor.constraint(equalToConstant: 100),
-            avatarImageView.widthAnchor.constraint(equalToConstant: 100),
+               imageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+               imageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
+               imageView.heightAnchor.constraint(equalToConstant: 100),
+               imageView.widthAnchor.constraint(equalToConstant: 100),
           
-            fullNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 27),
-            fullNameLabel.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 16),
+               userName.topAnchor.constraint(equalTo: topAnchor, constant: 27),
+               userName.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: 16),
           
-            setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 16),
-            setStatusButton.leftAnchor.constraint(equalTo:leftAnchor, constant: 16),
-            setStatusButton.rightAnchor.constraint(equalTo:rightAnchor, constant: -16),
-            setStatusButton.heightAnchor.constraint(equalToConstant: 50),
+               statusButton.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 16),
+               statusButton.leftAnchor.constraint(equalTo:leftAnchor, constant: 16),
+               statusButton.rightAnchor.constraint(equalTo:rightAnchor, constant: -16),
+               statusButton.heightAnchor.constraint(equalToConstant: 50),
           
-            statusLabel.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -34),
-            statusLabel.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
-            statusLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -16)
+               userStatus.bottomAnchor.constraint(equalTo: statusButton.topAnchor, constant: -34),
+               userStatus.leadingAnchor.constraint(equalTo: userName.leadingAnchor),
+               userStatus.rightAnchor.constraint(equalTo: rightAnchor, constant: -16)
            ])
            
-           setStatusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+           statusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
        }
        
        @objc func buttonPressed() {
-           guard let userStatus = statusLabel.text else { return }
+           guard let userStatus = userStatus.text else { return }
            print("\(userStatus)")
        }
 
