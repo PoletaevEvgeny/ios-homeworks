@@ -8,72 +8,47 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+    
     var window: UIWindow?
-
-
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let _ = (scene as? UIWindowScene) else { return }
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        //Создаем UIWindow
-        let window = UIWindow(windowScene: windowScene)
-        
-        //Создаем объект profileViewController
-        let profileViewController = ProfileViewController()
-        
-        //Создаем UINavigationController
-        let profileNovigationViewController = UINavigationController(rootViewController: profileViewController)
-        profileNovigationViewController.tabBarItem.title = "Profile"
-        profileNovigationViewController.tabBarItem.image = UIImage(named: "person")
-        
-        //Создаем объект feedViewController
         let feedViewController = FeedViewController()
-        let feedNovigationViewController = UINavigationController(rootViewController: feedViewController)
-        feedNovigationViewController.tabBarItem.title = "Feed"
-        feedNovigationViewController.tabBarItem.image = UIImage(named: "newspaper")
+        feedViewController.title = "Feed"
+        let feedNavigationController = UINavigationController(rootViewController: feedViewController)
+        feedNavigationController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
         
-        //Создаем объект tabViewController
-        let tabViewController = UITabBarController()
-        tabViewController.viewControllers = [profileNovigationViewController, feedNovigationViewController]
-        tabViewController.tabBar.backgroundColor = UIColor.gray
-        tabViewController.tabBar.tintColor = UIColor.blue
         
-        //Устанавливаем navigationViewController как rootViewController
-        window.rootViewController = tabViewController
+        let profileViewController = ProfileViewController()
+        profileViewController.title = "Profile"
+        let profileNavigationController = UINavigationController(rootViewController: profileViewController)
+        profileNavigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person.fill"))
         
-        //Устанавливаем созданное ранее window как главное window и делаем его видимым
+        
+        let logInViewController = LogInViewController()
+        logInViewController.title = "Profile"
+        let logInNavigationController = UINavigationController(rootViewController: logInViewController)
+        logInNavigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person.fill"))
+        
+        
+        let postViewController = PostViewController()
+        let postNavigationController = UINavigationController(rootViewController: postViewController)
+        postNavigationController.tabBarItem = UITabBarItem(title: "Post", image: UIImage(systemName: "message.fill"), selectedImage: UIImage(systemName: "message.fill"))
+        
+        
+        let myPost = Post(title: "New post")
+        postViewController.post = myPost
+        
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [logInNavigationController, feedNavigationController]
+        
+        
+        
+        let window = UIWindow(windowScene: windowScene)
+        window.rootViewController = tabBarController
         self.window = window
         window.makeKeyAndVisible()
     }
-    
-    func sceneDidDisconnect(_ scene: UIScene) {
-        // Called as the scene is being released by the system.
-        // This occurs shortly after the scene enters the background, or when its session is discarded.
-        // Release any resources associated with this scene that can be re-created the next time the scene connects.
-        // The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
-    }
-    
-    func sceneDidBecomeActive(_ scene: UIScene) {
-        // Called when the scene has moved from an inactive state to an active state.
-        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
-    }
-    
-    func sceneWillResignActive(_ scene: UIScene) {
-        // Called when the scene will move from an active state to an inactive state.
-        // This may occur due to temporary interruptions (ex. an incoming phone call).
-    }
-    
-    func sceneWillEnterForeground(_ scene: UIScene) {
-        // Called as the scene transitions from the background to the foreground.
-        // Use this method to undo the changes made on entering the background.
-    }
-    
-    func sceneDidEnterBackground(_ scene: UIScene) {
-        // Called as the scene transitions from the foreground to the background.
-        // Use this method to save data, release shared resources, and store enough scene-specific state information
-        // to restore the scene back to its current state.
-    }
 }
-

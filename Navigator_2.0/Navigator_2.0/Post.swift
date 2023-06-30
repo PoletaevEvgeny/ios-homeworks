@@ -10,3 +10,12 @@ import UIKit
 struct Post {
     let title: String
 }
+
+func main() {
+    
+    let myPost = Post(title: "New post")
+    
+    let postViewController = PostViewController()
+    
+    postViewController.post = myPost
+}
