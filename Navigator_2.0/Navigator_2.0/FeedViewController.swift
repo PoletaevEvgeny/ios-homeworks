@@ -24,7 +24,7 @@ class FeedViewController: UIViewController {
     private lazy var secondButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .blue
-        button.setTitle("Go to the post", for: .normal)
+        button.setTitle("Go to the new post", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false

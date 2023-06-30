@@ -9,10 +9,13 @@ import UIKit
 
 class InfoViewController: UIViewController {
     
+    let secondPost = Post(title: "Info")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .purple
-        self.navigationItem.title = "Info"
+        self.view.backgroundColor = .white
+        //self.navigationItem.title = "Info"
+        
     }
     
     override  func viewDidLayoutSubviews() {
@@ -20,12 +23,13 @@ class InfoViewController: UIViewController {
         
         let  button = UIButton(type: .system)
         button.isUserInteractionEnabled = true
-        button.frame = CGRect(origin: CGPoint(x: 125,y: 100), size: CGSize(width: 150, height: 30))
+        button.frame = CGRect(origin: CGPoint(x: 125,y: 300), size: CGSize(width: 150, height: 30))
         button.setTitle("Show message", for: .normal)
         button.backgroundColor = .systemYellow
         view.addSubview(button)
         button.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
     }
+    
     
     
     @objc func showAlert() {
@@ -47,3 +51,4 @@ class InfoViewController: UIViewController {
         present(alertViewController, animated: true, completion: nil)
     }
 }
+
