@@ -20,22 +20,13 @@ class PostViewController: UIViewController {
         
         let barButtonItem = UIBarButtonItem(image: UIImage(named: "info"), style: .plain, target: self, action: #selector(barButtonTap))
         navigationItem.setRightBarButton(barButtonItem, animated: false)
+     
     }
     
     @objc  func  barButtonTap() {
-        let feedViewController = InfoViewController()
-        present(feedViewController, animated: true)
+        let infoViewController = InfoViewController()
+        //let fullNameLabel = InfoViewController()
+        present(infoViewController, animated: true)
         //navigationController?.pushViewController(feedViewController, animated: true)
-    }
-    @objc func showDetails(){
-        
-        let alertViewController = UIAlertController(title: "Ding", message: "Good day?", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: .default)
-        let noAction = UIAlertAction(title: "No", style: .cancel)
-        
-        alertViewController.addAction(okAction)
-        alertViewController.addAction(noAction)
-        
-        present(alertViewController, animated: true)
     }
 }

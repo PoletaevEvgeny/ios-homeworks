@@ -8,7 +8,7 @@
 import UIKit
 
 class InfoViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .purple
@@ -27,13 +27,14 @@ class InfoViewController: UIViewController {
         button.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
     }
     
+    
     @objc func showAlert() {
         let InfoViewController = InfoViewController()
         //present(feedViewController, animated: true)
         navigationController?.pushViewController(InfoViewController, animated: true)
         
         let alertViewController = UIAlertController(title: "Ding", message: "Good day?", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: .default) { _ in
+        let okAction = UIAlertAction(title: "Yes", style: .default) { _ in
             print("Nice")
         }
         let noAction = UIAlertAction(title: "No", style: .cancel)  { _ in
