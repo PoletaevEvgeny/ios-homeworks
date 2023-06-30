@@ -8,7 +8,7 @@
 import UIKit
 
 class PostViewController: UIViewController {
-
+    
     var post: Post?
     
     override func viewDidLoad() {
@@ -20,7 +20,7 @@ class PostViewController: UIViewController {
         
         let barButtonItem = UIBarButtonItem(image: UIImage(named: "info"), style: .plain, target: self, action: #selector(barButtonTap))
         navigationItem.setRightBarButton(barButtonItem, animated: false)
-     
+        
     }
     
     @objc  func  barButtonTap() {
