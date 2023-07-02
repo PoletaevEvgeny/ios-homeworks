@@ -8,6 +8,7 @@
 import UIKit
 
 class LogInViewController: UIViewController {
+   
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -33,10 +34,10 @@ class LogInViewController: UIViewController {
     private lazy var logoImage: UIImageView = {
         let view = UIImageView()
         view.image = UIImage(named: "logo")
-        
+
         view.contentMode = .scaleAspectFit
         view.translatesAutoresizingMaskIntoConstraints = false
-        
+
         return view
     }()
     
@@ -51,7 +52,7 @@ class LogInViewController: UIViewController {
         view.delegate = self
         return view
     }()
-    
+
     private lazy var passwordField: UITextField = {
         let view = CustomTextField()
         view.textColor = .black
@@ -72,22 +73,22 @@ class LogInViewController: UIViewController {
         view.layer.borderWidth = 0.3
         view.layer.cornerRadius = 10
         view.tintColor = UIColor(named: "ColorSet")
-        
+
         view.axis = .vertical
         view.distribution = .fillProportionally
         view.spacing = 0.0
-        
+
         let separator = UIView()
         separator.backgroundColor = .lightGray
         separator.heightAnchor.constraint(equalToConstant: 0.3).isActive = true
         separator.translatesAutoresizingMaskIntoConstraints = false
-        
+
         view.addArrangedSubview(loginField)
         view.addArrangedSubview(separator)
         view.addArrangedSubview(passwordField)
-        
+
         view.translatesAutoresizingMaskIntoConstraints = false
-        
+
         return view
     }()
     
@@ -97,9 +98,9 @@ class LogInViewController: UIViewController {
         view.layer.backgroundColor = view.color?.cgColor
         view.titleLabel?.textColor = .white
         view.layer.cornerRadius = 10
-        
+
         view.translatesAutoresizingMaskIntoConstraints = false
-        
+
         return view
     }()
     
@@ -126,7 +127,7 @@ class LogInViewController: UIViewController {
     }
     
     
-    
+
     private func setup() {
         
         view.backgroundColor = .white
@@ -149,7 +150,7 @@ class LogInViewController: UIViewController {
             scrollView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
-            
+        
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
@@ -162,14 +163,14 @@ class LogInViewController: UIViewController {
     
     private func setKeyboardObservers() {
         let notificationCenter = NotificationCenter.default
-        
+
         notificationCenter.addObserver(
             self,
             selector: #selector(self.willShowKeyboard(_:)),
             name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
-        
+
         notificationCenter.addObserver(
             self,
             selector: #selector(self.willHideKeyboard(_:)),
@@ -177,7 +178,7 @@ class LogInViewController: UIViewController {
             object: nil
         )
     }
-    
+
     private func removeKeyboardObservers() {
         let notificationCenter = NotificationCenter.default
         notificationCenter.removeObserver(self)
@@ -193,12 +194,12 @@ class LogInViewController: UIViewController {
             logoImage.widthAnchor.constraint(equalToConstant: 100),
             logoImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
             logoImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
+        
             loginView.heightAnchor.constraint(equalToConstant: 100),
             loginView.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 120),
             loginView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             loginView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            
+        
             loginButton.heightAnchor.constraint(equalToConstant: 50),
             loginButton.topAnchor.constraint(equalTo: loginView.bottomAnchor, constant: 16),
             loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),

@@ -72,6 +72,7 @@ class ProfileHeaderView: UIView {
         self.addSubview(fullNameLabel)
         self.addSubview(setStatusButton)
         self.addSubview(statusLabel)
+        self.backgroundColor = .systemGray6
         
         NSLayoutConstraint.activate([
             avatarImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
@@ -86,6 +87,9 @@ class ProfileHeaderView: UIView {
             setStatusButton.leftAnchor.constraint(equalTo:leftAnchor, constant: 16),
             setStatusButton.rightAnchor.constraint(equalTo:rightAnchor, constant: -16),
             setStatusButton.heightAnchor.constraint(equalToConstant: 50),
+            setStatusButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
+            
+            
             
             statusLabel.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -34),
             statusLabel.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
