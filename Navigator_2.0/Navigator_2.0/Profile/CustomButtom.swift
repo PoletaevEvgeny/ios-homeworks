@@ -8,7 +8,7 @@
 import UIKit
 
 final class CustomButton: UIButton {
-
+    
     private let customAlpha: CGFloat = 0.8
     var color: UIColor?
     
@@ -60,7 +60,7 @@ final class CustomButton: UIButton {
             }
         }
     }
-
+    
     
     func touchDown() {
         UIView.animate(withDuration: 0.07, delay: 0.02, animations: {
