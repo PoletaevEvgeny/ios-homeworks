@@ -6,104 +6,125 @@
 //
 import UIKit
 
-class ProfileViewController: UIViewController {
-
-    let postCellIdentifire = "postCell"
-    let photoCellIdentifire = "photoCell"
+class ProfileViewController: UIViewController, UITableViewDelegate {
     
-    private let tableView: UITableView = {
-        let tableView = UITableView()
+    private var postFeed = Post.createPost()
+    
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
+        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.identifier)
+        
+        tableView.dataSource = self
+        tableView.delegate = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        
         return tableView
     }()
     
-    func setupTable() {
-        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: postCellIdentifire)
-        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: photoCellIdentifire)
-        tableView.delegate = self
-        tableView.dataSource = self
-    }
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(tableView)
-        setupUI()
-        setupTable()
-        
-        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
-        navigationItem.backBarButtonItem = backButton
+        view.backgroundColor = .white
+        addSubviews()
+        setupContraints()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
         
     }
     
-    func setupUI() {
+    
+    private func addSubviews(){
         view.addSubview(tableView)
-
-        NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        ])
+    }
+    
+    func pushPhotosViewController() {
+        let photosVC = PhotosViewController()
+        photosVC.parentNavigationControler = self.navigationController
+        navigationController?.pushViewController(photosVC, animated: true)
         
     }
+    
 }
-extension ProfileViewController: UITableViewDelegate{
+
+
+extension ProfileViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        2
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0   {
+            return 1
+        }
+        else {
+            return  postFeed.count
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0  {
+            let cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.identifier, for: indexPath) as! PhotosTableViewCell
+            cell.callBack = pushPhotosViewController
+            return cell
+        } else  {
+            let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
+            cell.setupCell(model: postFeed[indexPath.row])
+            
+            cell.plusView = {
+                let modalDetailVC = ModalDetailVC()
+                self.postFeed[indexPath.row].views += 1
+                self.tableView.reloadData()
+                modalDetailVC.detailPost = self.postFeed[indexPath.row]
+                modalDetailVC.parentNavigationControler = self.navigationController
+                self.navigationController?.present(modalDetailVC, animated: true)
+            }
+            
+            
+            cell.plusLike = {
+                self.postFeed[indexPath.row].likes += 1
+                self.tableView.reloadData()
+                //                }
+            }
+            
+            return cell
+        }
+    }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
-            let headerView = ProfileHeaderView()
-            return headerView
+            return ProfileHeaderView()
         } else {
             return nil
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 && indexPath.section == 0{
-            let photosViewController = PhotosViewController()
-            navigationController?.pushViewController(photosViewController, animated: true)
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return 150
         }
+        return tableView.rowHeight
+    }
+    
+    
+}
+
+extension UIView {
+    static var identifier: String {
+        String(describing: self)
     }
 }
-    
-    extension ProfileViewController: UITableViewDataSource {
-        
-        func numberOfSections(in tableView: UITableView) -> Int {
-            return 2
-        }
-        
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            switch section {
-            case 0:
-                return 1
-            case 1:
-                return posts.count
-            default:
-                break
-            }
-            return 0
-            
-        }
-        
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            switch indexPath.section {
-            case 0:
-                let cell = tableView.dequeueReusableCell(withIdentifier: photoCellIdentifire, for: indexPath) as! PhotosTableViewCell
-                cell.setup(tableView.bounds)
-                return cell
-            case 1:
-                let cell = tableView.dequeueReusableCell(withIdentifier: postCellIdentifire, for: indexPath) as! PostTableViewCell
-                let post = posts[indexPath.row]
-                cell.refresh(post)
-                return cell
-            default:
-                break
-            }
-            
-            return UITableViewCell()
-        }
-        
+
+extension ProfileViewController {
+    private func setupContraints() {
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
     }
+}
 
 

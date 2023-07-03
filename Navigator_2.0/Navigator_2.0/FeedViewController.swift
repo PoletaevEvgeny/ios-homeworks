@@ -9,58 +9,36 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
-    let secondPost = Post(title: "My First Post")
-    
-    private lazy var firstButton: UIButton = {
+    private lazy var postBut: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .red
         button.setTitle("Go to the post", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .black
+        
         return button
     }()
     
-    private lazy var secondButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .blue
-        button.setTitle("Go to the new post", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
+    func setConstraints() {
+        NSLayoutConstraint.activate([
+            postBut.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            postBut.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            postBut.heightAnchor.constraint(equalToConstant: 50),
+            postBut.widthAnchor.constraint(equalToConstant: 150)
+        ])
+    }
     
-    private lazy var stackView: UIStackView = { [unowned self] in
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        stackView.axis = .vertical
-        stackView.spacing = 10
-        
-        stackView.addArrangedSubview(self.firstButton)
-        stackView.addArrangedSubview(self.secondButton)
-        return stackView
-    }()
+    @objc func showPage () {
+        let postViewController = PostViewController()
+        navigationController?.pushViewController(postViewController, animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViews()
-        setupConstraints()
-    }
-    
-    private func setupViews() {
-        view.addSubview(stackView)
-    }
-    
-    private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)]) }
-    
-    @objc private func tapButton() {
-        let postVC = PostViewController()
-        postVC.post = secondPost
-        navigationController?.pushViewController(postVC, animated: true)
+        view.backgroundColor = .white
+        postBut.addTarget(self, action: #selector(showPage), for: .touchUpInside)
+        view.addSubview(postBut)
+        setConstraints()
+        
     }
 }

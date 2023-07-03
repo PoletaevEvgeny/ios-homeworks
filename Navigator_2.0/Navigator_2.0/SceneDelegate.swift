@@ -12,42 +12,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        
+        guard let _ = (scene as? UIWindowScene) else { return }
         guard let windowScene = (scene as? UIWindowScene) else { return }
+        let window = UIWindow(windowScene: windowScene)
+        let profileViewcontroller = LogInViewController()
+        let profileNovigationViewController = UINavigationController(rootViewController: profileViewcontroller)
+        profileNovigationViewController.tabBarItem.title = "Profile"
+        profileNovigationViewController.tabBarItem.image = UIImage(systemName: "person.crop.circle.fill")
+        
         
         let feedViewController = FeedViewController()
-        feedViewController.title = "Feed"
-        let feedNavigationController = UINavigationController(rootViewController: feedViewController)
-        feedNavigationController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
+        let feedNovigationViewController = UINavigationController(rootViewController: feedViewController)
+        feedNovigationViewController.tabBarItem.title = "Post"
+        feedNovigationViewController.tabBarItem.image = UIImage(systemName: "list.bullet.circle.fill")
+        let tabViewController = UITabBarController()
+        tabViewController.viewControllers = [profileNovigationViewController, feedNovigationViewController]
+        tabViewController.tabBar.backgroundColor = UIColor.systemGray6
+        tabViewController.tabBar.tintColor = UIColor.black
         
+        window.rootViewController =  tabViewController
         
-        let profileViewController = ProfileViewController()
-        profileViewController.title = "Profile"
-        let profileNavigationController = UINavigationController(rootViewController: profileViewController)
-        profileNavigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person.fill"))
-        
-        
-        let logInViewController = LogInViewController()
-        logInViewController.title = "Profile"
-        let logInNavigationController = UINavigationController(rootViewController: logInViewController)
-        logInNavigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person.fill"))
-        
-        
-        let postViewController = PostViewController()
-        let postNavigationController = UINavigationController(rootViewController: postViewController)
-        postNavigationController.tabBarItem = UITabBarItem(title: "Post", image: UIImage(systemName: "message.fill"), selectedImage: UIImage(systemName: "message.fill"))
-        
-        
-        let myPost = Post(title: "New post")
-        postViewController.post = myPost
-        
-        let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [logInNavigationController, feedNavigationController]
-        
-        
-        
-        let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = tabBarController
         self.window = window
         window.makeKeyAndVisible()
     }
